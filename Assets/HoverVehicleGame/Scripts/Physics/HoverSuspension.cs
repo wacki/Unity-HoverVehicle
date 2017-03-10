@@ -84,7 +84,7 @@ namespace HoverRacingGame
             Debug.DrawLine(transform.position, transform.position + hitInfo.normal, Color.cyan);
             Debug.DrawLine(transform.position, transform.position + prevNormal, Color.magenta);
 
-            //_goalUpDir = hitNormal;
+            _goalUpDir = hitNormal;
 
             float hitPointDelta = (hitPosition - transform.position).magnitude;
             float springDelta = hoverDistance - hitPointDelta;

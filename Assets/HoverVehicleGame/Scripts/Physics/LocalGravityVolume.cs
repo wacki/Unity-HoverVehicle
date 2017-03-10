@@ -5,8 +5,18 @@ using UnityEngine;
 namespace HoverRacingGame
 {
 
+    public enum GravityVolumeType
+    {
+        GVT_Point,
+        GVT_Line,
+        GVT_Spline
+    }
+
     public class LocalGravityVolume : MonoBehaviour
     {
+        public GravityVolumeType type;
+
+
         public float gravityAcceleration = 9.81f;
         private List<Rigidbody> affectedRBs = new List<Rigidbody>();
 

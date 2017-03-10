@@ -18,10 +18,17 @@ namespace HoverRacingGame
 
         public float sidewaysFrictionFactor = 0.9f;
 
+        public float testLeanAmount = 30.0f;
+
+        public GameObject model;
+
         protected Rigidbody _rb;
 
         public Transform centerOfMass;
         public Transform forwardThrustForcePoint;
+
+
+        public float testGravity = 9.81f;
 
         protected virtual void Awake()
         {
@@ -49,6 +56,8 @@ namespace HoverRacingGame
         {
             HandleUserInput();
             ApplyFrictionForce();
+
+            _rb.AddForce(groundNormal * -testGravity, ForceMode.Acceleration);
         }
 
         protected virtual void HandleUserInput()
@@ -84,6 +93,9 @@ namespace HoverRacingGame
         protected void Turn(float turnValue)
         {
             _rb.AddTorque(transform.rotation * new Vector3(0, turnValue * turnTorque, 0));
+
+            if (model != null)
+                model.transform.localRotation = Quaternion.Euler(0, 0, -turnValue * testLeanAmount);
         }
 
         protected virtual void ApplyFrictionForce()

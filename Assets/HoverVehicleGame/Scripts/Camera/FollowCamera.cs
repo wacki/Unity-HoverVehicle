@@ -19,7 +19,7 @@ namespace HoverRacingGame
 
 
             transform.position = Vector3.SmoothDamp(transform.position, _goalPosition, ref _smoothVelocity, 0.1f);
-            transform.LookAt(target.transform);
+            transform.LookAt(target.transform, target.transform.up);
 
 
         }

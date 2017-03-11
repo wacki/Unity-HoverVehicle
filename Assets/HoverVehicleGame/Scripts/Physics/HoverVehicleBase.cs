@@ -27,6 +27,7 @@ namespace HoverRacingGame
         public Transform centerOfMass;
         public Transform forwardThrustForcePoint;
 
+        public Transform turnPoint;
 
         public float testGravity = 9.81f;
 
@@ -92,10 +93,19 @@ namespace HoverRacingGame
 
         protected void Turn(float turnValue)
         {
-            _rb.AddTorque(transform.rotation * new Vector3(0, turnValue * turnTorque, 0));
+            Vector3 tangentRight = Vector3.ProjectOnPlane(transform.right, GetGroundNormal());
+            tangentRight.Normalize();
+
+            if (turnPoint == null)
+                _rb.AddTorque(transform.rotation * new Vector3(0, turnValue * turnTorque, 0));
+            else
+                _rb.AddForceAtPosition(tangentRight * turnValue * turnTorque, turnPoint.position);
 
             if (model != null)
                 model.transform.localRotation = Quaternion.Euler(0, 0, -turnValue * testLeanAmount);
+
+
+
         }
 
         protected virtual void ApplyFrictionForce()

@@ -40,3 +40,11 @@ Thumbs.db
 #merge orig files
 *.orig
 *.orig.meta
+
+# Lightmaps
+*.exr
+*.exr.meta
+LightmapSnapshot.asset
+LightmapSnapshot.asset.meta
+LightingData.asset
+LightingData.asset.meta

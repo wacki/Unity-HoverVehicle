@@ -58,7 +58,11 @@ namespace HoverRacingGame
             HandleUserInput();
             ApplyFrictionForce();
 
-            _rb.AddForce(groundNormal * -testGravity, ForceMode.Acceleration);
+            var normal = groundNormal;
+            if (!isGrounded)
+                normal = Vector3.up;
+
+            _rb.AddForce(normal * -testGravity, ForceMode.Acceleration);
         }
 
         protected virtual void HandleUserInput()

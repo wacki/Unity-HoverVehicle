@@ -1,33 +1,27 @@
 fileFormatVersion: 2
-guid: 03fc4c8b6cb260741ba2591c573b3bbe
-timeCreated: 1488919014
+guid: c30e0fc2a6fc56d4c9c9e78c7d196d6f
+timeCreated: 1489347788
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: curve1
-    100002: curve2
-    100004: curve3
-    100006: pCube1
-    100008: pCylinder1
-    100010: pCylinder2
-    100012: //RootNode
-    400000: curve1
-    400002: curve2
-    400004: curve3
-    400006: pCube1
-    400008: pCylinder1
-    400010: pCylinder2
-    400012: //RootNode
-    2300000: pCube1
-    2300002: pCylinder1
-    2300004: pCylinder2
-    3300000: pCube1
-    3300002: pCylinder1
-    3300004: pCylinder2
-    4300000: pCube1
-    4300002: pCylinder1
-    4300004: pCylinder2
+    100000: DNASegment
+    100002: SegmentStraight
+    100004: TestCircle
+    100006: //RootNode
+    400000: DNASegment
+    400002: SegmentStraight
+    400004: TestCircle
+    400006: //RootNode
+    2300000: DNASegment
+    2300002: SegmentStraight
+    2300004: TestCircle
+    3300000: DNASegment
+    3300002: SegmentStraight
+    3300004: TestCircle
+    4300000: SegmentStraight
+    4300002: DNASegment
+    4300004: TestCircle
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -53,7 +47,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 100
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1

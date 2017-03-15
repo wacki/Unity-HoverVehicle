@@ -1,33 +1,42 @@
 fileFormatVersion: 2
-guid: 03fc4c8b6cb260741ba2591c573b3bbe
-timeCreated: 1488919014
+guid: 34b13a5f3b068664781c18471527ba46
+timeCreated: 1489431959
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: curve1
-    100002: curve2
-    100004: curve3
-    100006: pCube1
-    100008: pCylinder1
-    100010: pCylinder2
-    100012: //RootNode
-    400000: curve1
-    400002: curve2
-    400004: curve3
-    400006: pCube1
-    400008: pCylinder1
-    400010: pCylinder2
-    400012: //RootNode
-    2300000: pCube1
-    2300002: pCylinder1
-    2300004: pCylinder2
-    3300000: pCube1
-    3300002: pCylinder1
-    3300004: pCylinder2
-    4300000: pCube1
-    4300002: pCylinder1
-    4300004: pCylinder2
+    100000: //RootNode
+    100002: TestTrack_Curved_Rails
+    100004: TestTrack_Curved_Road
+    100006: TestTrack_CurvedFlat_Rails
+    100008: TestTrack_CurvedFlat_Road
+    100010: TestTrack_Outside_Rails
+    100012: TestTrack_Outside_Road
+    400000: //RootNode
+    400002: TestTrack_Curved_Rails
+    400004: TestTrack_Curved_Road
+    400006: TestTrack_CurvedFlat_Rails
+    400008: TestTrack_CurvedFlat_Road
+    400010: TestTrack_Outside_Rails
+    400012: TestTrack_Outside_Road
+    2300000: TestTrack_Curved_Rails
+    2300002: TestTrack_Curved_Road
+    2300004: TestTrack_CurvedFlat_Rails
+    2300006: TestTrack_CurvedFlat_Road
+    2300008: TestTrack_Outside_Rails
+    2300010: TestTrack_Outside_Road
+    3300000: TestTrack_Curved_Rails
+    3300002: TestTrack_Curved_Road
+    3300004: TestTrack_CurvedFlat_Rails
+    3300006: TestTrack_CurvedFlat_Road
+    3300008: TestTrack_Outside_Rails
+    3300010: TestTrack_Outside_Road
+    4300000: TestTrack_Outside_Rails
+    4300002: TestTrack_Curved_Rails
+    4300004: TestTrack_CurvedFlat_Rails
+    4300006: TestTrack_Outside_Road
+    4300008: TestTrack_Curved_Road
+    4300010: TestTrack_CurvedFlat_Road
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -53,7 +62,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 100
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1

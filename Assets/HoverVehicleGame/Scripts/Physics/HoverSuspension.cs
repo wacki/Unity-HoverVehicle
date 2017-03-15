@@ -45,8 +45,8 @@ namespace HoverRacingGame
             
             Vector3 hoverForce = hitInfo.normal * CalcSpringForce(springDelta, springVelocity);
 
-            if (hitPointDelta > hoverDistance)
-                hoverForce = Vector3.zero;
+            //if (hitPointDelta > hoverDistance)
+                //hoverForce = Vector3.zero;
 
             _prevSpringDelta = springDelta;
 

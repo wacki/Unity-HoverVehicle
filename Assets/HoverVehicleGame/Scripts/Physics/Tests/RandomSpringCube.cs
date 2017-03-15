@@ -29,6 +29,7 @@ namespace HoverRacingGame
         private HoverState _state = HoverState.OnTrack;
 
         private Vector3 _upDir;
+        private bool _isGrounded = false;
 
         void Awake()
         {
@@ -37,7 +38,17 @@ namespace HoverRacingGame
         
         void Update()
         {
+            _upDir = Vector3.up;
+            _isGrounded = false;
 
+            RaycastHit hitInfo;
+            if (!Physics.Raycast(transform.position, -transform.up, out hitInfo, maxHoverDistance))
+                return;
+            
+            _upDir = hitInfo.normal;
+            _isGrounded = true;
+
+            transform.position = hitInfo.point + _upDir * minHoverDistance;
         }
 
         /// <summary>
@@ -45,7 +56,8 @@ namespace HoverRacingGame
         /// </summary>
         void OrientToUpDir()
         {
-
+            // for now we just force the exact up direction
+            transform.rotation = Quaternion.FromToRotation(_upDir, transform.up);
         }
     }
 

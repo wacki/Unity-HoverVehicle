@@ -13,6 +13,14 @@ namespace HoverRacingGame
     /// for this cube we can transfer them on an actual hover ship.
     /// 
     /// todo: clean this stuff up, ew..
+    /// 
+    /// 
+    /// 
+    /// Stuff to try:
+    /// 
+    /// 1. Align hover spring ray with previous normal. If no normal was hit then try to use the object's down direction
+    /// 2. Always use object's down direction
+    /// 3. 
     /// </summary>
     public class RandomSpringCube : MonoBehaviour
     {
@@ -29,6 +37,8 @@ namespace HoverRacingGame
         public float minHoverDistance;
 
         public float rayLength;
+
+        public LayerMask layerMask;
 
         public Rigidbody affectedBody;
 
@@ -72,7 +82,7 @@ namespace HoverRacingGame
             UpdateSpring();
 
             // apply a random force to see if the cube can keep itself on track
-            ApplyTestForces();
+            //ApplyTestForces();
         }
         
 
@@ -82,7 +92,7 @@ namespace HoverRacingGame
             _isGrounded = false;
 
             RaycastHit hitInfo;
-            if (!Physics.Raycast(transform.position, -transform.up, out hitInfo, rayLength))
+            if (!Physics.Raycast(transform.position, -transform.up, out hitInfo, rayLength, layerMask))
                 return;
 
             // ignore if specific script is attached
@@ -117,13 +127,13 @@ namespace HoverRacingGame
 
             // snap back to min and max point if we're outside of the range
             if (_springRatio > 1.0f)
-                transform.position = hitInfo.point + _upDir * minHoverDistance;
+                transform.position = hitInfo.point + transform.up * minHoverDistance;
             if (_springRatio < -1.0f)
-                transform.position = hitInfo.point + _upDir * maxHoverDistance;
+                transform.position = hitInfo.point + transform.up * maxHoverDistance;
 
 
 
-            float springForce = (_springRatio * _springForce - springDampen * springVelocity);
+            float springForce = (_springRatio * _springForce - _springDampen * springVelocity);
 
 
             var hoverForce = _upDir * springForce;
@@ -140,7 +150,7 @@ namespace HoverRacingGame
             randomForce = Vector3.ProjectOnPlane(randomForce, _upDir);
             randomForce.Normalize();
 
-            affectedBody.AddForce(randomForce * 30, ForceMode.Acceleration);
+            affectedBody.AddForce(randomForce * 70, ForceMode.Acceleration);
             Debug.DrawLine(transform.position, transform.position + randomForce, Color.magenta);
         }
 

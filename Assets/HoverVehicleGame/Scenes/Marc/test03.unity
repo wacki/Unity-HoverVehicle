@@ -264,6 +264,7 @@ GameObject:
   - component: {fileID: 117433457}
   - component: {fileID: 117433456}
   - component: {fileID: 117433455}
+  - component: {fileID: 117433458}
   m_Layer: 0
   m_Name: HoverCube
   m_TagString: Untagged
@@ -281,7 +282,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -297,8 +298,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 559289c49995e934681e7ce5cecd2679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHoverDistance: 3
-  minHoverDistance: 1
+  maxHoverDistance: 4
+  minHoverDistance: 2
+  rayLength: 8
+  affectedBody: {fileID: 117433455}
+  springStiffness: 3
+  springDampen: 1
 --- !u!4 &117433457
 Transform:
   m_ObjectHideFlags: 0
@@ -306,13 +311,27 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 117433454}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.6954165, y: 1.2, z: 1.0894806}
+  m_LocalPosition: {x: -4.6954165, y: 250, z: 144.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1819200802}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &117433458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 117433454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60c643287b257b142a40675c16562a31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tempK: 0.2
+  tempD: 0.8
+  goalUpDir: {x: 0, y: 1, z: 0}
 --- !u!1 &127182866
 GameObject:
   m_ObjectHideFlags: 0
@@ -1368,6 +1387,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5ea6cd0f514c3e34f8d1f387b59dee81, type: 2}
+    - target: {fileID: 100006, guid: 34b13a5f3b068664781c18471527ba46, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34b13a5f3b068664781c18471527ba46, type: 3}
   m_IsPrefabParent: 0
@@ -1479,6 +1502,17 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300002, guid: 34b13a5f3b068664781c18471527ba46, type: 3}
+--- !u!114 &596497618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 596497591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ec2bded4d5f59443aca61f7ef2aa014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &600363209 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400006, guid: c30e0fc2a6fc56d4c9c9e78c7d196d6f, type: 3}

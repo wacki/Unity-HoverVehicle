@@ -36,7 +36,7 @@ namespace HoverRacingGame
 
             // Do downward raycast
             RaycastHit hitInfo;
-            if (!Physics.Raycast(transform.position, -transform.up, out hitInfo, hoverDistance))
+            if (!Physics.Raycast(transform.position, -transform.up, out hitInfo, hoverDistance *2))
                 return;
             
             float hitPointDelta = (hitInfo.point - transform.position).magnitude;

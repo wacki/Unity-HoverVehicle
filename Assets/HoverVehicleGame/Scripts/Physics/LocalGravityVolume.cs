@@ -58,7 +58,7 @@ namespace HoverRacingGame
                 var offset = gravityClosestPoint - rbPos;
                 rb.AddForce(offset.normalized * gravityAcceleration, ForceMode.Acceleration);
 
-                var hs = rb.GetComponent<HoverSuspension>();
+                var hs = rb.GetComponent<HoverSuspensionOLD>();
                 //if (hs != null)
                   //  hs.goalUpVector = -offset.normalized;
 

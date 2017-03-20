@@ -5,17 +5,17 @@ using UnityEngine;
 
 namespace HoverRacingGame
 {
-    [RequireComponent(typeof(KeepUprightConstraint))]
+    [RequireComponent(typeof(KeepUprightConstraintOLD))]
     public class SingleRayHoverVehicle : HoverVehicleBase
     {
         [Header("SingleRayHoverVehicle Fields")]
-        public HoverSuspension hoverSuspension;
+        public HoverSuspensionOLD hoverSuspension;
 
-        private KeepUprightConstraint _uprightConstraint;
+        private KeepUprightConstraintOLD _uprightConstraint;
 
         private void Start()
         {
-            _uprightConstraint = GetComponent<KeepUprightConstraint>();
+            _uprightConstraint = GetComponent<KeepUprightConstraintOLD>();
 
             // apply hover force to root
             hoverSuspension.applyForceToRoot = true;

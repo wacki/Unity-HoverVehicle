@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace HoverRacingGame
 {
-    public class HoverSuspension : MonoBehaviour
+    public class HoverSuspensionOLD : MonoBehaviour
     {
         public float hoverDistance = 4.0f;
         public float springStiffness;
@@ -28,7 +28,7 @@ namespace HoverRacingGame
         private Vector3 _groundNormal = Vector3.up;
         private bool _isGrounded;
         
-        private void Update()
+        private void FixedUpdate()
         {
             Vector3 prevNormal = Vector3.up;
 

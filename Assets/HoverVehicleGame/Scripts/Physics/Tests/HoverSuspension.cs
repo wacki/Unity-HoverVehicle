@@ -5,103 +5,83 @@ using UnityEngine;
 namespace HoverRacingGame
 {
 
-    public class NewHoverSuspension : MonoBehaviour
+    public class HoverSuspension : MonoBehaviour
     {
-        public enum UpDirType
-        {
-            SurfaceNormal,
-            ObjectUp,
-            HeightProbe
-        }
-
-        public UpDirType springDirection;
-
-        // which rigidbody is affected by this spring
-        public Rigidbody affectedBody;
+        #region public fields
         // should we use a secondary prediction ray based on current velocity?
+        [Tooltip("Use prediction raycasts along our current velocity vector")]
         public bool usePrediction = true;
-        [Range(1, 60)]
-        public int predictionFrames = 1;
+        [Tooltip("How far into the future should we predict?"), Range(0.01f, 3)]
+        public float predictionTime = 0.2f;
 
-        // maximum distance from floor allowed by this spring
+        // The vehicle will snap to these min and max values!
+        [Tooltip("maximum distance from floor allowed by this spring")]
         public float maxHoverDistance;
-        // minimum distance from floor allowed by this spring
+        [Tooltip("minimum distance from floor allowed by this spring")]
         public float minHoverDistance;
 
-        // ray length to use
+        [Tooltip("actual distance of the hover raycast, should be greater than maxHoverDistance")]
         public float rayLength;
 
-        // which layers to ignore with this raycast?
+        [Tooltip("Layers ignored by the hover spring")]
         public LayerMask layerMask;
 
+        [Tooltip("Rigidbody affected by this suspension")]
+        public Rigidbody affectedBody;
 
-        // current up dir to use for the spring
-        private Vector3 _upDir;
-        private bool _isGrounded = false;
+        [Tooltip("Rigidbody affected by this suspension")]
+        public bool applyForceToRoot = true;
 
-        // keep track of previous spring delta for dampening
-        private float _prevSpringDelta;
+        [Tooltip("Stiffness of the suspension spring")]
+        public float springStiffness = 3.0f;
+        [Tooltip("Dampening factor of the suspension spring")]
+        public float springDampen = 1.0f;        
 
-        public float springStiffness;
-        public float springDampen;
+        #endregion
+
+        #region public properties
+
+        public Vector3 groundNormal { get { return _groundNormal; } }
+        public bool isGrounded { get { return _isGrounded; } }
+
+        #endregion
+
+
+        #region public functions
+
+        #endregion
+
+        #region private
 
         // internal spring values
         private float _hoverSpringLength;
         private float _hoverSpringHalfLength;
+        private float _prevSpringDelta;
 
         // internal spring variables
         private float _springRatio;
 
-        private KeepUprightConstraintOLD _uprightConstraint;
+        private Vector3 _groundNormal;
+        private bool _isGrounded;
 
-        void Awake()
+        private void Awake()
         {
             _hoverSpringLength = maxHoverDistance - minHoverDistance;
             _hoverSpringHalfLength = 0.5f * _hoverSpringLength;
-
-            _uprightConstraint = GetComponent<KeepUprightConstraintOLD>();
         }
 
-        void FixedUpdate()
+        private void FixedUpdate()
         {
             // update spring (this is what we will actually use)
             UpdateSpring();
-
-            // apply a random force to see if the cube can keep itself on track
-            ApplyTestForces();
         }
 
-
+        // if we ever want to change it
         private Vector3 GetSpringDirection()
         {
-            switch (springDirection)
-            {
-                case UpDirType.SurfaceNormal:
-                    // use last known surface normal
-                    if (_isGrounded)
-                        return -_upDir;
-                    // if we weren't grounded use local down direction
-                    else
-                        return -transform.up;
-
-                case UpDirType.ObjectUp:
-                    return -transform.up;
-                case UpDirType.HeightProbe:
-                    // todo: check height probe setup for normal
-                    var heightProbe = GetComponent<HeightProbe>();
-                    if (heightProbe.isGrounded)
-                    {
-                        heightProbe.useCustomProbeDirection = true;
-                        heightProbe.propeDirection = -heightProbe.currentNormal;
-                        return -heightProbe.currentNormal;
-                    }
-                    else
-                        heightProbe.useCustomProbeDirection = false;
-                    break;
-            }
-
             return -transform.up;
         }
+
 
         bool SpringRaycast(Vector3 direction, out float distance, out Vector3 normal)
         {
@@ -121,7 +101,8 @@ namespace HoverRacingGame
             if (usePrediction)
             {
                 Vector3 predictionOrigin = transform.position;
-                predictionOrigin += affectedBody.velocity * Time.deltaTime * predictionFrames;
+                Vector3 projectedVelocity = Vector3.ProjectOnPlane(affectedBody.velocity, normal);
+                predictionOrigin += projectedVelocity * predictionTime;
 
                 if (Physics.Raycast(predictionOrigin, direction, out hitInfo, rayLength, layerMask))
                 {
@@ -133,7 +114,7 @@ namespace HoverRacingGame
                 }
 
             }
-
+            normal.Normalize();
             return true;
         }
 
@@ -145,7 +126,7 @@ namespace HoverRacingGame
 
             // calculate current ground normal and distance to ground
             float impactDistance;
-            _isGrounded = SpringRaycast(springDirection, out impactDistance, out _upDir);
+            _isGrounded = SpringRaycast(springDirection, out impactDistance, out _groundNormal);
 
 
             // early out if we're not grounded
@@ -162,6 +143,8 @@ namespace HoverRacingGame
 
             // current delta from spring equilibrium point
             var springDelta = (minHoverDistance + _hoverSpringHalfLength) - impactDistance;
+            var test = (_prevSpringDelta - springDelta);
+            test = Mathf.Clamp(test, 0.0f, 1.0f);
             var springVelocity = (_prevSpringDelta - springDelta) / Time.deltaTime;
             _prevSpringDelta = springDelta;
 
@@ -176,8 +159,8 @@ namespace HoverRacingGame
                 transform.position = hitPoint - springDirection * maxHoverDistance;
 
             // calculate the actual spring force required
-            float k = springStiffness * affectedBody.mass * Physics.gravity.magnitude;
-            float b = springDampen * affectedBody.mass * Physics.gravity.magnitude;
+            float k = springStiffness * affectedBody.mass;
+            float b = springDampen * affectedBody.mass;
 
             _springRatio = Mathf.Clamp(_springRatio, -1.0f, 1.0f);
 
@@ -185,25 +168,20 @@ namespace HoverRacingGame
 
 
             var hoverForce = -springDirection * springForce;
-            affectedBody.AddForce(hoverForce);
 
-            if (_uprightConstraint != null)
-                _uprightConstraint.goalUpDir = -springDirection;
+            if(applyForceToRoot)
+                affectedBody.AddForce(hoverForce);
+            else
+                affectedBody.AddForceAtPosition(hoverForce, transform.position);            
         }
 
-        private Vector3 _randomForce;
-        void ApplyTestForces()
-        {
-            Vector3 randomForce = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
 
-            randomForce = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            //randomForce = transform.rotation* randomForce;
-            randomForce = Vector3.ProjectOnPlane(randomForce, -GetSpringDirection());
-            randomForce.Normalize();
 
-            affectedBody.AddForce(randomForce * 70, ForceMode.Acceleration);
-            Debug.DrawLine(transform.position, transform.position + randomForce, Color.magenta);
-        }
+        #endregion
+
+        #region editor
+
+#if UNITY_EDITOR
 
         void OnDrawGizmos()
         {
@@ -231,6 +209,9 @@ namespace HoverRacingGame
 
 
         }
+
+#endif
+        #endregion
 
     }
 

@@ -9,7 +9,7 @@ namespace HoverRacingGame
     public class MultiRayHoverVehicle : HoverVehicleBase
     {
         [Header("MultiRayHoverVehicle Fields")]
-        public HoverSuspension[] hoverSuspensions;
+        public HoverSuspensionOLD[] hoverSuspensions;
 
         private void Start()
         {

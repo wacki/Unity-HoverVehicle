@@ -5,7 +5,7 @@ using UnityEngine;
 namespace HoverRacingGame
 {
 
-    public class KeepUprightConstraint : MonoBehaviour
+    public class KeepUprightConstraintOLD : MonoBehaviour
     {
 
         public float tempK = 0.2f;

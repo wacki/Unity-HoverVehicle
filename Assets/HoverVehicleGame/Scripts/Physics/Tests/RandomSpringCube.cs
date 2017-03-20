@@ -63,7 +63,7 @@ namespace HoverRacingGame
         // internal spring variables
         private float _springRatio;
 
-        private KeepUprightConstraint _uprightConstraint;
+        private KeepUprightConstraintOLD _uprightConstraint;
 
         void Awake()
         {
@@ -73,7 +73,7 @@ namespace HoverRacingGame
             _hoverSpringLength = maxHoverDistance - minHoverDistance;
             _hoverSpringHalfLength = 0.5f * _hoverSpringLength;
 
-            _uprightConstraint = GetComponent<KeepUprightConstraint>();
+            _uprightConstraint = GetComponent<KeepUprightConstraintOLD>();
         }
         
         void Update()
@@ -137,7 +137,6 @@ namespace HoverRacingGame
 
 
             var hoverForce = _upDir * springForce;
-            Debug.Log(_springRatio + " " + hoverForce + " ");
             affectedBody.AddForce(hoverForce);
 
             _uprightConstraint.goalUpDir = _upDir;

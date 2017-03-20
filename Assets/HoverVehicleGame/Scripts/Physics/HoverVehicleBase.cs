@@ -55,6 +55,11 @@ namespace HoverRacingGame
         // todo: distinguish between brake force and throttle forward and backwards!
         protected virtual void Update()
         {
+
+        }
+
+        protected virtual void FixedUpdate()
+        {
             HandleUserInput();
             ApplyFrictionForce();
 
@@ -67,6 +72,7 @@ namespace HoverRacingGame
 
         protected virtual void HandleUserInput()
         {
+
             if (!inputActive)
                 return;
 

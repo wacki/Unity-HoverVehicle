@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace HoverRacingGame
 {
-    public class NewKeepUprightConstraint : MonoBehaviour
+    public class KeepUprightConstraint : MonoBehaviour
     {
         // whether or not to use height probe rays to calculate our own "surface normal"
         public bool useHeightProbe = false;
@@ -19,8 +19,11 @@ namespace HoverRacingGame
 
         public float tempK = 0.2f;
         public float tempD = 0.8f;
-        
+
         public Vector3 goalUpDir = Vector3.up;
+
+        public bool constrainToMaxAngle;
+        public float maxAngleOffset;
 
         // smoothed GoalUpDir
         private Vector3 _smoothedGoalUpDir = Vector3.up;
@@ -34,12 +37,15 @@ namespace HoverRacingGame
 
         private void FixedUpdate()
         {
+            UpdateGoalUp();
             UpdateUprightConstraint();
         }
 
         private Vector3 _smoothNormalVel;
         private void UpdateGoalUp()
         {
+            goalUpDir.Normalize();
+
             if (smoothGoalNormal)
                 _smoothedGoalUpDir = Vector3.SmoothDamp(_smoothedGoalUpDir, goalUpDir, ref _smoothNormalVel, normalSmoothTime);
             else
@@ -51,7 +57,24 @@ namespace HoverRacingGame
             var up = transform.up;
 
             Quaternion deltaRot = Quaternion.FromToRotation(_smoothedGoalUpDir, up);
+
+            if(constrainToMaxAngle)
+            {
+                float angle;
+                Vector3 axis;
+                deltaRot.ToAngleAxis(out angle, out axis);
+                if (angle > maxAngleOffset)
+                {
+                    transform.rotation = Quaternion.AngleAxis(angle - maxAngleOffset, -axis) * transform.rotation;
+                    deltaRot = Quaternion.FromToRotation(_smoothedGoalUpDir, transform.up);
+
+                    var newAngularVel = Vector3.Project(_rb.angularVelocity, axis.normalized);
+                    _rb.angularVelocity = _rb.angularVelocity - newAngularVel;
+                }
+            }
+
             Vector3 eulerDelta = deltaRot.eulerAngles;
+
             // fuck unity for not using negative angles
             eulerDelta.x = (eulerDelta.x > 180) ? eulerDelta.x - 360 : eulerDelta.x;
             eulerDelta.y = (eulerDelta.y > 180) ? eulerDelta.y - 360 : eulerDelta.y;
@@ -61,11 +84,16 @@ namespace HoverRacingGame
             //torque.y = 0.0f;
             _rb.AddTorque(torque * _rb.mass);
 
-            if(usePivot)
+            if (usePivot)
             {
                 // todo: ...
             }
-                
+
+        }
+
+        private void OnDrawGizmos()
+        {
+
         }
     }
 

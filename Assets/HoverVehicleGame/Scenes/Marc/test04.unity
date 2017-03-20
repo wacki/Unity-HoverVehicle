@@ -2669,10 +2669,10 @@ GameObject:
   m_Component:
   - component: {fileID: 783940474}
   - component: {fileID: 783940473}
-  - component: {fileID: 783940472}
   - component: {fileID: 783940470}
-  - component: {fileID: 783940471}
   - component: {fileID: 783940469}
+  - component: {fileID: 783940472}
+  - component: {fileID: 783940471}
   m_Layer: 0
   m_Name: HoverVehicle03
   m_TagString: Untagged
@@ -2718,37 +2718,31 @@ MonoBehaviour:
 --- !u!114 &783940471
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114970450483075532, guid: 02726a236e54d17458c184a1ff5f4d75,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 783940468}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9578f44979170a64c9916d0639dacfa1, type: 3}
+  m_Script: {fileID: 11500000, guid: 63995e75757a48a4fb1c9066d0aa7727, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  usePrediction: 1
-  predictionTime: 0.2
-  maxHoverDistance: 5
-  minHoverDistance: 1
-  rayLength: 10
+  smoothTime: 0.2
+  hoverDistance: 2
+  rayLength: 5
   layerMask:
     serializedVersion: 2
     m_Bits: 4294967035
-  affectedBody: {fileID: 783940473}
-  applyForceToRoot: 1
-  springStiffness: 90
-  springDampen: 20
+  groundNormal: {x: 0, y: 1, z: 0}
+  isGrounded: 0
 --- !u!114 &783940472
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114156058828626786, guid: 02726a236e54d17458c184a1ff5f4d75,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 783940468}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19160f724105ac745a9ad026a8e8a52d, type: 3}
+  m_Script: {fileID: 11500000, guid: 59837ea8a739d1743a67a387bbfed17e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inputActive: 1
@@ -2757,13 +2751,13 @@ MonoBehaviour:
   brakeAcceleration: 2000
   thrusterForce: 2000
   turnTorque: 3000
-  sidewaysFrictionFactor: 1.5
-  testLeanAmount: 0
+  sidewaysFrictionFactor: 0.9
+  testLeanAmount: 30
   model: {fileID: 1193683854}
   centerOfMass: {fileID: 639960678}
   forwardThrustForcePoint: {fileID: 0}
   turnPoint: {fileID: 2002244356}
-  testGravity: 9.81
+  testGravity: 0
   springDirection: 0
   hoverSuspension: {fileID: 783940471}
 --- !u!54 &783940473

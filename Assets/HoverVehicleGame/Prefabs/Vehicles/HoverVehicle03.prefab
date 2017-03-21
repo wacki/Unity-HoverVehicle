@@ -114,8 +114,7 @@ GameObject:
   - component: {fileID: 54248224376349772}
   - component: {fileID: 114156058828626786}
   - component: {fileID: 114723688237115210}
-  - component: {fileID: 114970450483075532}
-  - component: {fileID: 114188009483429666}
+  - component: {fileID: 114182506375072912}
   m_Layer: 2
   m_Name: HoverVehicle03
   m_TagString: Untagged
@@ -273,7 +272,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1591503896499940}
   m_LocalRotation: {x: -0, y: -0.70710677, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 645, y: 1089, z: 682}
+  m_LocalPosition: {x: -487.6, y: 3.6, z: -482}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4973242819289148}
@@ -389,8 +388,8 @@ MonoBehaviour:
   forwardAcceleration: 20
   backwardAcceleration: 0
   turnAcceleration: -6
-  brakeAcceleration: 0
-  sidewaysFrictionFactor: 0.9
+  brakeAcceleration: 20
+  sidewaysFrictionFactor: 1
   model: {fileID: 1355662976925804}
   centerOfMass: {fileID: 4113010550030662}
   forwardThrustForcePoint: {fileID: 0}
@@ -400,9 +399,9 @@ MonoBehaviour:
   testGravity: 40
   springDirection: 0
   limitMaxSpeed: 1
-  hoverSuspension: {fileID: 114970450483075532}
-  maxSpeedKMH: 400
---- !u!114 &114188009483429666
+  hoverSuspension: {fileID: 0}
+  maxSpeedKMH: 500
+--- !u!114 &114182506375072912
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -414,8 +413,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverDistance: 2
-  springStiffness: 2000
-  springDampen: 400
+  springStiffness: 4000
+  springDampen: 800
   affectedBody: {fileID: 54248224376349772}
   applyForceToRoot: 1
   usePredictionRay: 1
@@ -432,7 +431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useHeightProbe: 0
-  smoothGoalNormal: 0
+  smoothGoalNormal: 1
   normalSmoothTime: 0.2
   usePivot: 0
   pivotPosition: {x: 0, y: 0, z: 0}
@@ -441,29 +440,6 @@ MonoBehaviour:
   goalUpDir: {x: 0, y: 1, z: 2.2204459e-17}
   constrainToMaxAngle: 1
   maxAngleOffset: 20
---- !u!114 &114970450483075532
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1591503896499940}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9578f44979170a64c9916d0639dacfa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  usePrediction: 0
-  predictionTime: 0.2
-  maxHoverDistance: 2
-  minHoverDistance: 0.5
-  rayLength: 10
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 4294967035
-  affectedBody: {fileID: 54248224376349772}
-  applyForceToRoot: 1
-  springStiffness: 200
-  springDampen: 30
 --- !u!136 &136599206839328370
 CapsuleCollider:
   m_ObjectHideFlags: 1

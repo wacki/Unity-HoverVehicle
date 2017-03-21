@@ -18,7 +18,6 @@ public class PencilTurnScript : MonoBehaviour
     {
 
         var turnValue = Input.GetAxis("Horizontal");
-        Debug.Log("turnValue " +turnValue + " " + (transform.forward * turnValue * turnAcceleration));
         var _rb = GetComponent<Rigidbody>();
         _rb.AddForceAtPosition(transform.forward * turnValue * turnAcceleration, frontTurnPoint.position, ForceMode.Acceleration);
         _rb.AddForceAtPosition(-transform.forward * turnValue * turnAcceleration * rearMod, rearTurnPoint.position, ForceMode.Acceleration);

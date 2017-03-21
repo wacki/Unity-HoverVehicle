@@ -18,7 +18,7 @@ namespace HoverRacingGame
         public float sidewaysFrictionFactor = 0.9f;
         
         public GameObject model;
-
+          
         protected Rigidbody _rb;
 
         public Transform centerOfMass;
@@ -124,8 +124,10 @@ namespace HoverRacingGame
             Vector3 tangentRight = Vector3.ProjectOnPlane(transform.right, GetGroundNormal());
             tangentRight.Normalize();
 
+            //Debug.Log(_rb.angularVelocity);
+
             if (turnPoint == null)
-                _rb.AddTorque(transform.rotation * new Vector3(0, turnValue * turnAcceleration, 0), ForceMode.Acceleration);
+                _rb.AddTorque( new Vector3(0, turnValue * turnAcceleration, 0), ForceMode.Acceleration);
             else
                 _rb.AddForceAtPosition(tangentRight * turnValue * turnAcceleration, turnPoint.position, ForceMode.Acceleration);
 

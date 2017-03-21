@@ -75,12 +75,17 @@ namespace HoverRacingGame
 
             Vector3 eulerDelta = deltaRot.eulerAngles;
 
+            Debug.Log("Euler Delta" + eulerDelta);
+
             // fuck unity for not using negative angles
             eulerDelta.x = (eulerDelta.x > 180) ? eulerDelta.x - 360 : eulerDelta.x;
             eulerDelta.y = (eulerDelta.y > 180) ? eulerDelta.y - 360 : eulerDelta.y;
             eulerDelta.z = (eulerDelta.z > 180) ? eulerDelta.z - 360 : eulerDelta.z;
 
-            Vector3 torque = -tempK * eulerDelta - tempD * _rb.angularVelocity;
+            Vector3 projectedAngularVelocity = Vector3.Project(_rb.angularVelocity, transform.up);
+            projectedAngularVelocity = _rb.angularVelocity - projectedAngularVelocity;
+
+            Vector3 torque = -tempK * eulerDelta - tempD * projectedAngularVelocity;
             //torque.y = 0.0f;
             _rb.AddTorque(torque * _rb.mass);
 

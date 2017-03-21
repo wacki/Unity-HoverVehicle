@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace HoverRacingGame
 {
-    public class KeepUprightConstraint : MonoBehaviour
+    public class KeepUprightConstraint_OLD2 : MonoBehaviour
     {
         // whether or not to use height probe rays to calculate our own "surface normal"
         public bool useHeightProbe = false;

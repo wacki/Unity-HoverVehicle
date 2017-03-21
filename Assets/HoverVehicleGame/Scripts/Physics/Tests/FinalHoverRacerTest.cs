@@ -25,7 +25,7 @@ namespace HoverRacingGame
         //######## END TEST CODE VARIABLES ##########
         //###########################################
 
-        public HoverSuspension hoverSuspension;
+        public HoverSuspension_OLD2 hoverSuspension;
 
         private KeepUprightConstraint _uprightConstraint;
 

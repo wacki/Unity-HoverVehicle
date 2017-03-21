@@ -115,6 +115,7 @@ GameObject:
   - component: {fileID: 114156058828626786}
   - component: {fileID: 114723688237115210}
   - component: {fileID: 114970450483075532}
+  - component: {fileID: 114188009483429666}
   m_Layer: 2
   m_Name: HoverVehicle03
   m_TagString: Untagged
@@ -272,7 +273,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1591503896499940}
   m_LocalRotation: {x: -0, y: -0.70710677, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 645, y: 3.44, z: 682}
+  m_LocalPosition: {x: 645, y: 1089, z: 682}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4973242819289148}
@@ -387,7 +388,7 @@ MonoBehaviour:
   inputActive: 1
   forwardAcceleration: 20
   backwardAcceleration: 0
-  turnAcceleration: -4
+  turnAcceleration: -6
   brakeAcceleration: 0
   sidewaysFrictionFactor: 0.9
   model: {fileID: 1355662976925804}
@@ -396,11 +397,29 @@ MonoBehaviour:
   turnPoint: {fileID: 4500258519460952}
   frontTurnPoint: {fileID: 4360351978182282}
   rearTurnPoint: {fileID: 4068423419618344}
-  testGravity: 9.81
+  testGravity: 40
   springDirection: 0
   limitMaxSpeed: 1
   hoverSuspension: {fileID: 114970450483075532}
   maxSpeedKMH: 400
+--- !u!114 &114188009483429666
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1591503896499940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f981556c8f2b24e89d321e373db19f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverDistance: 2
+  springStiffness: 2000
+  springDampen: 400
+  affectedBody: {fileID: 54248224376349772}
+  applyForceToRoot: 1
+  usePredictionRay: 1
+  predictionFrameCount: 2
 --- !u!114 &114723688237115210
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -428,12 +447,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1591503896499940}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9578f44979170a64c9916d0639dacfa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  usePrediction: 1
+  usePrediction: 0
   predictionTime: 0.2
   maxHoverDistance: 2
   minHoverDistance: 0.5

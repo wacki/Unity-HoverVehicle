@@ -104,12 +104,14 @@ namespace HoverRacingGame
 
         protected override Vector3 GetGroundNormal()
         {
-            return hoverSuspension.groundNormal;
+            //return hoverSuspension.groundNormal;
+            return GetComponent<HoverSuspensionOLD>().groundNormal;
         }
 
         protected override bool IsGrounded()
         {
-            return hoverSuspension.isGrounded;
+            //return hoverSuspension.isGrounded;
+            return GetComponent<HoverSuspensionOLD>().isGrounded;
         }
     }
 

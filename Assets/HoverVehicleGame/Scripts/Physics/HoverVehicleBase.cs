@@ -10,9 +10,7 @@ namespace HoverRacingGame
 
         public float forwardAcceleration = 100.0f;
         public float backwardAcceleration = 50.0f;
-
         public float turnAcceleration = 50.0f;
-
         public float brakeAcceleration = 1000.0f;
         
         public float sidewaysFrictionFactor = 0.9f;

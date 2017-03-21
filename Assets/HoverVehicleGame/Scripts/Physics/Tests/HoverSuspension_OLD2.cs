@@ -5,7 +5,7 @@ using UnityEngine;
 namespace HoverRacingGame
 {
 
-    public class HoverSuspension : MonoBehaviour
+    public class HoverSuspension_OLD2 : MonoBehaviour
     {
         #region public fields
         // should we use a secondary prediction ray based on current velocity?

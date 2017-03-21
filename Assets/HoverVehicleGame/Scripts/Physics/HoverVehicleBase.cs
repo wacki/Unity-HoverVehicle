@@ -11,15 +11,12 @@ namespace HoverRacingGame
         public float forwardAcceleration = 100.0f;
         public float backwardAcceleration = 50.0f;
 
+        public float turnAcceleration = 50.0f;
+
         public float brakeAcceleration = 1000.0f;
-
-        public float thrusterForce = 1000;
-        public float turnTorque = 100;
-
+        
         public float sidewaysFrictionFactor = 0.9f;
-
-        public float testLeanAmount = 30.0f;
-
+        
         public GameObject model;
 
         protected Rigidbody _rb;
@@ -28,6 +25,10 @@ namespace HoverRacingGame
         public Transform forwardThrustForcePoint;
 
         public Transform turnPoint;
+
+
+        public Transform frontTurnPoint;
+        public Transform rearTurnPoint;
 
         public float testGravity = 9.81f;
 
@@ -42,6 +43,15 @@ namespace HoverRacingGame
         public Vector3 groundNormal { get { return GetGroundNormal(); } }
         public bool movingForward { get { return IsMovingForward(); } }
         public bool isGrounded { get { return IsGrounded(); } }
+
+        public bool isMovingForward
+        {
+            get
+            {
+                var dot = Vector3.Dot(_rb.velocity.normalized, transform.forward);
+                return dot > 0.0f;
+            }
+        }
 
 
         protected abstract Vector3 GetGroundNormal();
@@ -90,30 +100,38 @@ namespace HoverRacingGame
         {
             Vector3 tangentForward = Vector3.ProjectOnPlane(transform.forward, GetGroundNormal());
             tangentForward.Normalize();
-
-            Vector3 force = tangentForward * thrusterForce * moveValue;
+            
+            Vector3 acc = tangentForward * moveValue * forwardAcceleration;
+            //if (moveValue > 0)
+            //    acc *= forwardAcceleration;
+            //else
+            //    acc *= backwardAcceleration;
 
             if (forwardThrustForcePoint == null)
-                _rb.AddForce(force);
+                _rb.AddForce(acc, ForceMode.Acceleration);
             else
-                _rb.AddForceAtPosition(force, forwardThrustForcePoint.position);
+                _rb.AddForceAtPosition(acc, forwardThrustForcePoint.position, ForceMode.Acceleration);
 
 
         }
 
         protected virtual void Turn(float turnValue)
         {
+            //if (!isMovingForward)
+            //    turnValue *= -1;
+
+
             Vector3 tangentRight = Vector3.ProjectOnPlane(transform.right, GetGroundNormal());
             tangentRight.Normalize();
 
             if (turnPoint == null)
-                _rb.AddTorque(transform.rotation * new Vector3(0, turnValue * turnTorque, 0));
+                _rb.AddTorque(transform.rotation * new Vector3(0, turnValue * turnAcceleration, 0), ForceMode.Acceleration);
             else
-                _rb.AddForceAtPosition(tangentRight * turnValue * turnTorque, turnPoint.position);
+                _rb.AddForceAtPosition(tangentRight * turnValue * turnAcceleration, turnPoint.position, ForceMode.Acceleration);
 
-            if (model != null)
-                model.transform.localRotation = Quaternion.Euler(0, 0, -turnValue * testLeanAmount);
 
+            //_rb.AddForceAtPosition(tangentRight * turnValue * turnAcceleration, frontTurnPoint.position, ForceMode.Acceleration);
+            //_rb.AddForceAtPosition(-tangentRight * turnValue * turnAcceleration, rearTurnPoint.position, ForceMode.Acceleration);
 
 
         }

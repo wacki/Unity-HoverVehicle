@@ -35,7 +35,7 @@ namespace HoverRacingGame
         [Tooltip("Stiffness of the suspension spring")]
         public float springStiffness = 3.0f;
         [Tooltip("Dampening factor of the suspension spring")]
-        public float springDampen = 1.0f;        
+        public float springDampen = 1.0f;
 
         #endregion
 
@@ -79,7 +79,12 @@ namespace HoverRacingGame
         // if we ever want to change it
         private Vector3 GetSpringDirection()
         {
-            return -transform.up;
+            // While in the air we use our object normal
+            // when grounded we use the last known ground normal
+            if (!isGrounded)
+                return -transform.up;
+            else
+                return -_groundNormal;
         }
 
 
@@ -169,10 +174,10 @@ namespace HoverRacingGame
 
             var hoverForce = -springDirection * springForce;
 
-            if(applyForceToRoot)
+            if (applyForceToRoot)
                 affectedBody.AddForce(hoverForce);
             else
-                affectedBody.AddForceAtPosition(hoverForce, transform.position);            
+                affectedBody.AddForceAtPosition(hoverForce, transform.position);
         }
 
 

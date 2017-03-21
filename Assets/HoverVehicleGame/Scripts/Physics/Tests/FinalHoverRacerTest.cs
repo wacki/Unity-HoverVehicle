@@ -84,11 +84,7 @@ namespace HoverRacingGame
             if (_curSpeed > maxSpeedKMH)
                 return;
 
-            Vector3 tangentForward = Vector3.ProjectOnPlane(transform.forward, GetGroundNormal());
-            tangentForward.Normalize();
-
-            Vector3 force = tangentForward * thrusterForce * moveValue;
-            _rb.AddForce(force);
+            base.Move(moveValue);
         }
 
         protected float MStoKMH(float speed)

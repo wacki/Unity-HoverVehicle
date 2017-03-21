@@ -1836,6 +1836,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.x
       value: -90.00001
       objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: 34b13a5f3b068664781c18471527ba46, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34b13a5f3b068664781c18471527ba46, type: 3}
   m_IsPrefabParent: 0
@@ -2765,7 +2769,9 @@ MonoBehaviour:
   turnPoint: {fileID: 2002244356}
   testGravity: 9.81
   springDirection: 0
+  limitMaxSpeed: 1
   hoverSuspension: {fileID: 783940471}
+  maxSpeedKMH: 300
 --- !u!54 &783940473
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4365,7 +4371,9 @@ MonoBehaviour:
   turnPoint: {fileID: 0}
   testGravity: 0
   springDirection: 0
+  limitMaxSpeed: 0
   hoverSuspension: {fileID: 1454210139}
+  maxSpeedKMH: 300
 --- !u!1 &1483015279
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,6 +20,8 @@ namespace HoverRacingGame
 
         public UpDirType springDirection;
 
+        public bool limitMaxSpeed = false;
+
         //######## END TEST CODE VARIABLES ##########
         //###########################################
 
@@ -39,7 +41,7 @@ namespace HoverRacingGame
         protected override void Update()
         {
             base.Update();
-            
+
             // more test code
             var keepUpright = GetComponent<KeepUprightConstraint>();
             if (keepUpright != null)
@@ -51,7 +53,7 @@ namespace HoverRacingGame
                 simpleKeepUpright.goalUpDir = GetGroundNormal();
 
             var vel = GetComponent<Rigidbody>().velocity;
-            
+
             _curSpeed = MStoKMH(vel.magnitude);
         }
 
@@ -59,14 +61,34 @@ namespace HoverRacingGame
         {
             base.FixedUpdate();
 
+            if (!limitMaxSpeed)
+                return;
+
             if (_curSpeed > maxSpeedKMH)
             {
-                var rb = GetComponent<Rigidbody>();
-                var vel = rb.velocity;
-                
+                var vel = _rb.velocity;
                 var goalSpeed = KMHtoMS(maxSpeedKMH);
-                rb.AddForce(vel.normalized * (goalSpeed - vel.magnitude), ForceMode.Impulse);
+
+
+                var velocityDelta = vel.magnitude - goalSpeed;
+
+
+                _rb.AddForce(vel.normalized * (goalSpeed - vel.magnitude), ForceMode.Acceleration);
+                Debug.Log("Brake Impulse " + (vel.normalized * (goalSpeed - vel.magnitude)));
             }
+        }
+
+
+        protected override void Move(float moveValue)
+        {
+            if (_curSpeed > maxSpeedKMH)
+                return;
+
+            Vector3 tangentForward = Vector3.ProjectOnPlane(transform.forward, GetGroundNormal());
+            tangentForward.Normalize();
+
+            Vector3 force = tangentForward * thrusterForce * moveValue;
+            _rb.AddForce(force);
         }
 
         protected float MStoKMH(float speed)

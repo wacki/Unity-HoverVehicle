@@ -86,7 +86,7 @@ namespace HoverRacingGame
             Turn(h);
         }
 
-        protected void Move(float moveValue)
+        protected virtual void Move(float moveValue)
         {
             Vector3 tangentForward = Vector3.ProjectOnPlane(transform.forward, GetGroundNormal());
             tangentForward.Normalize();
@@ -101,7 +101,7 @@ namespace HoverRacingGame
 
         }
 
-        protected void Turn(float turnValue)
+        protected virtual void Turn(float turnValue)
         {
             Vector3 tangentRight = Vector3.ProjectOnPlane(transform.right, GetGroundNormal());
             tangentRight.Normalize();

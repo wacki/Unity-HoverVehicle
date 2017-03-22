@@ -29,12 +29,7 @@ namespace HoverRacingGame
         private void Start()
         {
         }
-
-        protected override void Update()
-        {
-            base.Update();
-            
-        }
+        
 
         protected override Vector3 GetGroundNormal()
         {

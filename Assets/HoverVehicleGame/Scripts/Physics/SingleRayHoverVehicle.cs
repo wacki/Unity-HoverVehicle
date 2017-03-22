@@ -21,10 +21,8 @@ namespace HoverRacingGame
             hoverSuspension.applyForceToRoot = true;
         }
 
-        protected override void Update()
+        protected void Update()
         {
-            base.Update();
-
             _uprightConstraint.goalUpDir = hoverSuspension.groundNormal;
         }
 

@@ -3563,7 +3563,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4135734704748648, guid: eddc6224a164bc841b8b3118acad7191, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1089
+      value: 1039.6
       objectReference: {fileID: 0}
     - target: {fileID: 4135734704748648, guid: eddc6224a164bc841b8b3118acad7191, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3587,46 +3587,9 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4135734704748648, guid: eddc6224a164bc841b8b3118acad7191, type: 2}
       propertyPath: m_RootOrder
-      value: 21
+      value: 22
       objectReference: {fileID: 0}
-    - target: {fileID: 114693343715750566, guid: eddc6224a164bc841b8b3118acad7191,
-        type: 2}
-      propertyPath: frontTurnPoint
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114693343715750566, guid: eddc6224a164bc841b8b3118acad7191,
-        type: 2}
-      propertyPath: rearTurnPoint
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114706250992430926, guid: eddc6224a164bc841b8b3118acad7191,
-        type: 2}
-      propertyPath: sidewayFrictionFactor
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 114216452301884228, guid: eddc6224a164bc841b8b3118acad7191,
-        type: 2}
-      propertyPath: smoothGoalNormal
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114186364480132258, guid: eddc6224a164bc841b8b3118acad7191,
-        type: 2}
-      propertyPath: springStiffness
-      value: 2000
-      objectReference: {fileID: 0}
-    - target: {fileID: 114186364480132258, guid: eddc6224a164bc841b8b3118acad7191,
-        type: 2}
-      propertyPath: springDampen
-      value: 400
-      objectReference: {fileID: 0}
-    - target: {fileID: 114706250992430926, guid: eddc6224a164bc841b8b3118acad7191,
-        type: 2}
-      propertyPath: groundedGravity
-      value: 40
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114693343715750566, guid: eddc6224a164bc841b8b3118acad7191, type: 2}
-    - {fileID: 114714627842163722, guid: eddc6224a164bc841b8b3118acad7191, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eddc6224a164bc841b8b3118acad7191, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1139506810
@@ -4978,6 +4941,56 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.68, y: 1, z: 5.81}
   m_Center: {x: 0.000005751185, y: -0.66, z: 0.34}
+--- !u!1001 &1618897042
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4893113111575200, guid: 02726a236e54d17458c184a1ff5f4d75, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 641.1161
+      objectReference: {fileID: 0}
+    - target: {fileID: 4893113111575200, guid: 02726a236e54d17458c184a1ff5f4d75, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1039.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4893113111575200, guid: 02726a236e54d17458c184a1ff5f4d75, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 669.8011
+      objectReference: {fileID: 0}
+    - target: {fileID: 4893113111575200, guid: 02726a236e54d17458c184a1ff5f4d75, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4893113111575200, guid: 02726a236e54d17458c184a1ff5f4d75, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 4893113111575200, guid: 02726a236e54d17458c184a1ff5f4d75, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4893113111575200, guid: 02726a236e54d17458c184a1ff5f4d75, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4893113111575200, guid: 02726a236e54d17458c184a1ff5f4d75, type: 2}
+      propertyPath: m_RootOrder
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 1591503896499940, guid: 02726a236e54d17458c184a1ff5f4d75, type: 2}
+      propertyPath: m_Name
+      value: HoverVehicle03 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1591503896499940, guid: 02726a236e54d17458c184a1ff5f4d75, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 02726a236e54d17458c184a1ff5f4d75, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1620980660
 GameObject:
   m_ObjectHideFlags: 0

@@ -74,8 +74,7 @@ namespace HoverRacingGame
             }
 
             Vector3 eulerDelta = deltaRot.eulerAngles;
-
-            Debug.Log("Euler Delta" + eulerDelta);
+            
 
             // fuck unity for not using negative angles
             eulerDelta.x = (eulerDelta.x > 180) ? eulerDelta.x - 360 : eulerDelta.x;

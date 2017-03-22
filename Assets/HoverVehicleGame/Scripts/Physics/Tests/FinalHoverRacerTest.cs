@@ -38,9 +38,8 @@ namespace HoverRacingGame
             _uprightConstraint = GetComponent<KeepUprightConstraint>();
         }
 
-        protected override void Update()
+        protected void Update()
         {
-            base.Update();
 
             // more test code
             var keepUpright = GetComponent<KeepUprightConstraint>();

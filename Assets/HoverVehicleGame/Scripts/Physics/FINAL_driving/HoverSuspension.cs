@@ -100,6 +100,7 @@ namespace HoverRacingGame
             return true;
         }
 
+
         private void FixedUpdate()
         {
             Vector3 prevNormal = Vector3.up;
@@ -127,7 +128,6 @@ namespace HoverRacingGame
                 //hoverForce = Vector3.zero;
 
             _prevSpringDelta = springDelta;
-            Debug.Log(hoverForce);
             if (applyForceToRoot)
                 affectedBody.AddForce(hoverForce, ForceMode.Force);
             else

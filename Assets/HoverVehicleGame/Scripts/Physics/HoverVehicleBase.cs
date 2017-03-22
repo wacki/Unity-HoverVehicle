@@ -59,12 +59,7 @@ namespace HoverRacingGame
             var velDot = Vector3.Dot(_rb.velocity.normalized, transform.forward);
             return velDot > 0.0f;
         }
-
-        // todo: distinguish between brake force and throttle forward and backwards!
-        protected virtual void Update()
-        {
-
-        }
+        
 
         protected virtual void FixedUpdate()
         {

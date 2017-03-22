@@ -21,6 +21,8 @@ namespace HoverRacingGame
 
         public float sidewayFrictionFactor;
 
+        public float maxSpeedKMH = 300.0f;
+
         #endregion
 
         #region public properties
@@ -34,19 +36,33 @@ namespace HoverRacingGame
 
         #region private 
         protected HoverSuspension _hoverSuspension;
+        private KeepUprightConstraint _uprightConstraint;
         protected Rigidbody _rb;
+        private float _curSpeed;
 
         private void Awake()
         {
             _hoverSuspension = GetComponent<HoverSuspension>();
+            _uprightConstraint = GetComponent<KeepUprightConstraint>();
             _rb = GetComponent<Rigidbody>();
+
+            if (centerOfMass != null)
+                _rb.centerOfMass = centerOfMass.localPosition;
         }
 
-        protected virtual void FixedUpdate()
+        private void Update()
+        {
+            _curSpeed = MStoKMH(_rb.velocity.magnitude);
+        }
+
+        private void FixedUpdate()
         {
             HandleUserInput();
             ApplyFrictionForce();
 
+            var keepUpright = GetComponent<KeepUprightConstraint>();
+            if (keepUpright != null)
+                keepUpright.goalUpDir = groundNormal;
 
             _rb.AddForce(gravity, ForceMode.Acceleration);
         }
@@ -70,6 +86,9 @@ namespace HoverRacingGame
 
         private void Move(float moveValue)
         {
+            if (_curSpeed > maxSpeedKMH)
+                return;
+
             Vector3 tangentForward = ProjectOnGround(transform.forward);
             tangentForward.Normalize();
 
@@ -116,6 +135,20 @@ namespace HoverRacingGame
             Debug.DrawLine(transform.position, transform.position + tangentVelocity.normalized * Mathf.Clamp(tangentVelocity.magnitude, 0, 4), Color.red);
 
             _rb.AddForce(tangentVelocity * sidewayFrictionFactor, ForceMode.Impulse);
+        }
+
+        protected float MStoKMH(float speed)
+        {
+            return speed * 3.6f;
+        }
+        protected float KMHtoMS(float speed)
+        {
+            return speed / 3.6f;
+        }
+
+        void OnGUI()
+        {
+            GUILayout.Label(_curSpeed.ToString());
         }
         #endregion
     }
